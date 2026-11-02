@@ -3,6 +3,7 @@
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
 `create-t3-app@7.23.1`
+
 ```
    ___ ___ ___   __ _____ ___   _____ ____    __   ___ ___
   / __| _ \ __| /  \_   _| __| |_   _|__ /   /  \ | _ \ _ \
