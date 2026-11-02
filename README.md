@@ -24,13 +24,25 @@ npm run dev               # http://localhost:3000
 
 Defined in `.env.example` and validated in `src/env.mjs`:
 
-| Variable          | Description                                                       |
-| ----------------- | ----------------------------------------------------------------- |
-| `DATABASE_URL`    | Prisma connection string. Defaults to `file:./db.sqlite` locally. |
-| `NEXTAUTH_SECRET` | Required in production. Generate with `openssl rand -base64 32`.  |
-| `NEXTAUTH_URL`    | Public base URL, e.g. `http://localhost:3000`.                    |
+| Variable                                      | Description                                                       |
+| --------------------------------------------- | ----------------------------------------------------------------- |
+| `DATABASE_URL`                                | Prisma connection string. Defaults to `file:./db.sqlite` locally. |
+| `NEXTAUTH_SECRET`                             | Required in production. Generate with `openssl rand -base64 32`.  |
+| `NEXTAUTH_URL`                                | Public base URL, e.g. `http://localhost:3000`.                    |
+| `DISCORD_CLIENT_ID` / `DISCORD_CLIENT_SECRET` | OAuth credentials for Discord sign-in (see below).                |
 
 Set `SKIP_ENV_VALIDATION=1` to skip validation (useful for Docker/CI builds).
+
+### Authentication (Discord)
+
+Sign-in uses the Discord OAuth provider.
+
+1. Create an application at <https://discord.com/developers/applications>.
+2. Under **OAuth2**, add the redirect URL `http://localhost:3000/api/auth/callback/discord` (use your real domain in production).
+3. Copy the client ID and secret into `.env` as `DISCORD_CLIENT_ID` and `DISCORD_CLIENT_SECRET`.
+4. Run `npm run db:push`, start the app and click **Sign in**.
+
+To use another provider, add it to `providers` in `src/server/auth.ts` and its variables to `src/env.mjs` and `.env.example`.
 
 ## Scripts
 
