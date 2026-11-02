@@ -15,6 +15,7 @@
     "postinstall": "prisma generate",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -57,7 +58,8 @@
     "prisma": "^5.1.1",
     "storybook": "^10.6.5",
     "tailwindcss": "^3.3.3",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^3.2.7"
   },
   "ct3aMetadata": {
     "initVersion": "7.23.1"
