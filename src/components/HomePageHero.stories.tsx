@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import HomePageHeroSection from "~/components/HomePageHero";
 
 const meta = {
@@ -14,4 +15,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {},
+};
+
+export const CustomCtaLink: Story = {
+  args: {
+    ctaHref: "/docs",
+  },
 };
