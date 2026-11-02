@@ -51,6 +51,7 @@ To use another provider, add it to `providers` in `src/server/auth.ts` and its v
 | `npm run dev`                       | Start the dev server                        |
 | `npm run build` / `npm start`       | Production build / serve                    |
 | `npm run lint` / `npm run lint:fix` | ESLint                                      |
+| `npm test`                          | Vitest unit tests                           |
 | `npm run typecheck`                 | `tsc --noEmit`                              |
 | `npm run format` / `format:check`   | Prettier write / check                      |
 | `npm run storybook`                 | Storybook on http://localhost:6006          |

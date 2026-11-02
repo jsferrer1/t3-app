@@ -6,7 +6,11 @@ import {
   publicProcedure,
 } from "~/server/api/trpc";
 
+/** Upper bound for a post name, to keep stored strings reasonable. */
+export const MAX_POST_NAME_LENGTH = 255;
+
 export const postRouter = createTRPCRouter({
+  /** Scaffold example; remove once real public routes exist. */
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(({ input }) => {
@@ -16,11 +20,10 @@ export const postRouter = createTRPCRouter({
     }),
 
   create: protectedProcedure
-    .input(z.object({ name: z.string().min(1) }))
-    .mutation(async ({ ctx, input }) => {
-      // simulate a slow db call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
+    .input(
+      z.object({ name: z.string().trim().min(1).max(MAX_POST_NAME_LENGTH) }),
+    )
+    .mutation(({ ctx, input }) => {
       return ctx.db.post.create({
         data: {
           name: input.name,
@@ -36,6 +39,7 @@ export const postRouter = createTRPCRouter({
     });
   }),
 
+  /** Scaffold example used by the home page to demo protected routes. */
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";
   }),
