@@ -21,7 +21,7 @@
   },
   "storybook": {
     "writeStories": true,
-    "storiesLocation": "/src/stories"
+    "storiesLocation": "/src/components"
   },
   "envVariables": {
     "exampleFile": "/.env.example"

@@ -1,5 +1,5 @@
 {
-  "name": "t3-starter-template",
+  "name": "t3-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -40,7 +40,6 @@
   "devDependencies": {
     "@storybook/addon-docs": "^10.6.5",
     "@storybook/addon-links": "^10.6.5",
-    "@storybook/addon-onboarding": "^10.6.5",
     "@storybook/nextjs": "^10.6.5",
     "@types/eslint": "^8.44.2",
     "@types/node": "^18.16.0",

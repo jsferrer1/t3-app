@@ -1,69 +1,63 @@
-# Create T3 App
+# T3 App
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A full-stack, typesafe web app built on the [T3 Stack](https://create.t3.gg/) (bootstrapped with `create-t3-app@7.23.1`):
 
-`create-t3-app@7.23.1`
+- [Next.js](https://nextjs.org) (Pages Router)
+- [tRPC](https://trpc.io) for the typesafe API
+- [Prisma](https://prisma.io) with SQLite for local development
+- [NextAuth.js](https://next-auth.js.org) for authentication
+- [Tailwind CSS](https://tailwindcss.com) and Font Awesome for UI
+- [Storybook](https://storybook.js.org) for component development
 
-```
-   ___ ___ ___   __ _____ ___   _____ ____    __   ___ ___
-  / __| _ \ __| /  \_   _| __| |_   _|__ /   /  \ | _ \ _ \
- | (__|   / _| / /\ \| | | _|    | |  |_ \  / /\ \|  _/  _/
-  \___|_|_\___|_/‾‾\_\_| |___|   |_| |___/ /_/‾‾\_\_| |_|
+## Getting started
 
+Requires Node.js 20+.
 
-│
-◇  What will your project be called?
-│  t3-starter-template
-│
-◇  Will you be using TypeScript or JavaScript?
-│  TypeScript
-│
-◇  Will you be using Tailwind CSS for styling?
-│  Yes
-│
-◇  Would you like to use tRPC?
-│  Yes
-│
-◇  What authentication provider would you like to use?
-│  NextAuth.js
-│
-◇  What database ORM would you like to use?
-│  Prisma
-│
-◇   EXPERIMENTAL  Would you like to use Next.js App Router?
-│  No
-│
-◇  Should we initialize a Git repository and stage the changes?
-│  Yes
-│
-◇  Should we run 'npm install' for you?
-│  Yes
-│
-◇  What import alias would you like to use?
-│  ~/
+```bash
+npm install
+cp .env.example .env      # then fill in the values, see below
+npm run db:push           # create the local SQLite database
+npm run dev               # http://localhost:3000
 ```
 
-## What's next? How do I make an app with this?
+### Environment variables
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Defined in `.env.example` and validated in `src/env.mjs`:
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+| Variable          | Description                                                       |
+| ----------------- | ----------------------------------------------------------------- |
+| `DATABASE_URL`    | Prisma connection string. Defaults to `file:./db.sqlite` locally. |
+| `NEXTAUTH_SECRET` | Required in production. Generate with `openssl rand -base64 32`.  |
+| `NEXTAUTH_URL`    | Public base URL, e.g. `http://localhost:3000`.                    |
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Set `SKIP_ENV_VALIDATION=1` to skip validation (useful for Docker/CI builds).
 
-## Learn More
+## Scripts
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+| Command                             | What it does                                |
+| ----------------------------------- | ------------------------------------------- |
+| `npm run dev`                       | Start the dev server                        |
+| `npm run build` / `npm start`       | Production build / serve                    |
+| `npm run lint` / `npm run lint:fix` | ESLint                                      |
+| `npm run typecheck`                 | `tsc --noEmit`                              |
+| `npm run format` / `format:check`   | Prettier write / check                      |
+| `npm run storybook`                 | Storybook on http://localhost:6006          |
+| `npm run build-storybook`           | Static Storybook build                      |
+| `npm run db:push` / `db:studio`     | Sync the Prisma schema / open Prisma Studio |
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+CI (`.github/workflows/ci.yml`) runs lint, typecheck, format check, build and Storybook build on every PR.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## Project layout
 
-## How do I deploy this?
+```
+src/pages/            Next.js pages and API routes (auth, tRPC)
+src/components/       React components (with *.stories.tsx next to them)
+src/server/api/       tRPC routers (add new ones to root.ts)
+src/server/auth.ts    NextAuth configuration
+src/server/db.ts      Prisma client
+prisma/schema.prisma  Database schema
+```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Deployment
+
+The default SQLite database is for local development only; it does not persist on serverless hosts such as Vercel. Switch the Prisma datasource to a hosted database (Postgres, MySQL, ...) before deploying. See the create-t3-app guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker).
