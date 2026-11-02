@@ -17,8 +17,11 @@ export const Default: Story = {
   args: {},
 };
 
-export const CustomCtaLink: Story = {
+export const CustomContent: Story = {
   args: {
+    title: "Ship faster",
+    description: "Every piece of copy and the call to action is configurable.",
+    ctaLabel: "Read the docs",
     ctaHref: "/docs",
   },
 };
